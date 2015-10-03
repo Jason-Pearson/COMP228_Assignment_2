@@ -3,14 +3,14 @@ import java.util.Random;
 import java.util.Scanner;
 public class Test {
 	//PUBLIC INSTANCE VARIABLE
-	Random rand = new Random();
-	public int correctAnswers[] = {1,3,2,3,1};
-	public int score = 0;
+	Random rand = new Random(); //for the random message
+	public int correctAnswers[] = {1,3,2,3,1}; //to display the correct answer in the message after user gets it wrong
+	public int score = 0; // to track the score for each question answered correctly
 	//EMPTY CONSTRUCTOR
 	public Test() {
 	}
 	//PUBLIC METHODS
-	public void simulateQuestions(int question) //to display all 5 questions - Test Driver class puts in question count value from local variable from while loop - to cycle through questions
+	public void simulateQuestions(int question) //to display all 5 questions per loop cycle in the while loop in the Driver class 
 	{
 		if (question == 1){
 		System.out.printf("Question 1: What is the proper way to instantiate an object?%n"
@@ -34,12 +34,12 @@ public class Test {
 			}
 	}
 
-	public void checkAnswer(int question, int answer) //to check the answers for the questions
+	public void checkAnswer(int question, int answer) //to check the answers for the question after user inputs in inputAnswer method
 	{
-		if (question == 1 && answer == 1)
+		if (question == 1 && answer == 1) //if answer correct for that question -
 		{
-			simulateMessage(true, answer);
-			this.score += 1;
+			simulateMessage(true, answer);// - call method to display a message for the correct answer
+			this.score += 1;// - and add to the user's score
 		}
 		else if (question == 2 && answer == 3)
 		{
@@ -64,17 +64,17 @@ public class Test {
 			simulateMessage(true, answer);
 			this.score += 1;
 		}
-		else
+		else // if the answer is incorrect, however -
 		{
-			question--;
-			simulateMessage(false, correctAnswers[question]);
+			question--;//this is the current question and its respective value - decremented for the correctAnswers array to display the correct answer (since arrays have items 0 and up, and the question variable is initialized as 1, not 0) for the current question in the simulateMessage method
+			simulateMessage(false, correctAnswers[question]); //call method to display message for the incorrect answer 
 		}
 	}
 	public void simulateMessage(boolean correct, int correctAnswer) // to display random response for the correct or incorrect answers
 	{
-		if(correct == true)
+		if(correct == true) // if the answer was "correct" (or true), display a random message for a correct answer
 		{
-			switch (rand.nextInt(4))
+			switch (rand.nextInt(4)) //random variable picks number from 0 - 3, switch statement then checks it and displays a message according to that number
 			{
 			case 0:
 				System.out.printf("Very good!%n%n");
@@ -90,12 +90,12 @@ public class Test {
 				break;			
 			}
 		}
-		else
+		else // if answer was incorrect (or false), display random message for an incorrect answer
 		{
-			switch (rand.nextInt(4))
+			switch (rand.nextInt(4)) // same function - random number (0-3), switch statement display message according to number
 			{
 			case 0:
-				System.out.printf("Wrong, answer is %d%n%n", correctAnswer);
+				System.out.printf("Wrong, answer is %d%n%n", correctAnswer); // and this is where the corrctAnswer array's value comes in to display the correct answer (the correct number)
 				break;
 			case 1:
 				System.out.printf("Ooh, so close. Answer was %d%n%n", correctAnswer);
@@ -110,12 +110,12 @@ public class Test {
 		}
 	}
 
-	public void inputAnswer(int question, int answer)
+	public void inputAnswer(int question, int answer) // method asks for the user's input for the answer to the following question (question number is given by while loop in the constructor
 	{
-		checkAnswer(question, answer);
+		checkAnswer(question, answer); // then call checkAnswer method to check the answer for the follow question
 	}
 	
-	public void finalScore()
+	public void finalScore() // in the end of answering all the questions, Driver class calls finalScore to display the results 
 	{
 		System.out.printf("Right answers: %d%nWrong answers: %d%nYour score: %.01f%s", this.score, (5-this.score), (((double)this.score / 5)*100),"%");
 	}
