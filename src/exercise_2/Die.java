@@ -8,12 +8,11 @@ public class Die {
 	public int die;
 	
 	//CONSTRUCTOR~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	public Die(int die) {
+	public Die() {
 		
 		SecureRandom randomDie = new SecureRandom();
-		die = randomDie.nextInt(6) + 1;
+		this.die = randomDie.nextInt(6) + 1;
 		
-		this.die = die;
 	}
 	
 	//PUBLIC METHODS
